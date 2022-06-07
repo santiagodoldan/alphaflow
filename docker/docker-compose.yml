@@ -1,0 +1,30 @@
+version: "3.4"
+
+volumes:
+  alphaflow_bundle:
+
+services:
+  alphaflow:
+    command: rails server
+    build:
+      target: runtime
+      context: ../
+      dockerfile: docker/Dockerfile
+    ports:
+      - 3000:3000
+    env_file: ../.env
+    volumes:
+      - ../:/var/www/app:cached
+      - alphaflow_bundle:/bundle:cached
+      - ~/.bash_history:/root/.bash_history
+    environment:
+      BUNDLE_PATH: /bundle
+      RAILS_ENV: development
+    depends_on:
+      - alphaflow_postgres
+  alphaflow_postgres:
+    image: postgres:14.1
+    environment:
+      POSTGRES_USER: alphaflow
+      POSTGRES_PASSWORD: development
+      POSTGRES_DB: alphaflow_development
