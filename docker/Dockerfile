@@ -12,6 +12,7 @@ RUN apk add --no-cache \
     linux-headers \
     postgresql-client \
     postgresql-dev \
+    tzdata \
     tini
 
 # Set the working directory
