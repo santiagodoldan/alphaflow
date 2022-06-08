@@ -1,0 +1,27 @@
+<h1>New Todo</h1>
+
+<div>
+  <% @todo.errors.full_messages.each do |error| %>
+    <div><%= error %></div>
+  <% end %>
+</div>
+
+<%= form_for @todo do |f| %>
+  <div>
+    <%= f.text_field :title %>
+  </div>
+
+  <div>
+    <%= f.text_field :description %>
+  </div>
+
+  <div>
+    <%= f.select :status, todo_status_options %>
+  </div>
+
+  <div>
+    <%= f.date_field :due_date %>
+  </div>
+
+  <%= f.submit %>
+<% end %>

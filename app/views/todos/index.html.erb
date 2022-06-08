@@ -1,0 +1,28 @@
+<h1>Todos</h1>
+
+<%= link_to 'Add Todo', new_todo_path %>
+
+<div>
+  <% @todos.each do |todo| %>
+    <div>
+      <div style='float: left;'>
+        <%= todo.title %>
+      </div>
+
+      <div style='float: left;'>
+        <%= todo.description %>
+      </div>
+
+      <div style='float: left;'>
+        <%= form_for todo do |f| %>
+          <%= f.select :status, todo_status_options(todo) %>
+          <%= f.date_field :due_date %>
+
+          <%= f.submit %>
+        <% end %>
+      </div>
+    </div>
+
+    <div style='clear: both'></div>
+  <% end %>
+</div>
